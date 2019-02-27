@@ -135,6 +135,7 @@ let g:bullets_enabled_file_types = ['markdown', 'text', 'gitcommit']
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,javascript EmmetInstall
+autocmd FileType html,css,javascript,markdown setlocal ts=2 sw=2 expandtab
 
 let g:closetag_filenames = "*.html,*.js,*.jsx"
 let g:closetag_close_shortcut = ''
@@ -158,7 +159,7 @@ let g:fzf_colors =
 \ 'header':  ['fg', 'Comment'] }
 
 " Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ .log\
 
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
