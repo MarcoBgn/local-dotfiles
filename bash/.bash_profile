@@ -36,6 +36,9 @@ function mas {
   cd "$HOME/mas-projects/${1:-frontend}"
 }
 
+function dir {
+  cd "$HOME/${1:-spikes}"
+}
 # Git branch in prompt.
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -43,6 +46,7 @@ parse_git_branch() {
 
 
 export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
