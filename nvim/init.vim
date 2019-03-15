@@ -31,6 +31,12 @@ let mapleader=","
 " Enable hidden buffers
 set hidden
 
+" Clipboard behaviour
+set clipboard=unnamed
+
+" Clipboard paste respect indentation
+:nnoremap p p=`]
+
 " Searching
 set hlsearch
 set incsearch
@@ -198,8 +204,11 @@ map <C-b> :bn<CR>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+" Search for visually selected word/pattern
+vnoremap // y/\V<C-R>"<CR>
+
 nnoremap <c-p> :FZF<cr>
-inoremap jj <Esc>
+inoremap vv <Esc>
 
 " Panes and Tab navigation
 nnoremap <S-Tab> gT 
