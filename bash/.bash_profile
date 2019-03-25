@@ -1,7 +1,5 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 alias bex='bundle exec'
 alias ber='bundle exec rspec'
 alias beru='bundle exec rubocop'
@@ -58,3 +56,6 @@ export EDITOR="$VISUAL"
 
 source ~/.bashrc
 
+export PATH="~/.rbenv/bin:$PATH"
+
+eval "$(rbenv init -)"
