@@ -13,6 +13,9 @@ set switchbuf+=usetab,newtab
 " Fix backspace indent
 set backspace=indent,eol,start
 
+" Indent base behaviour 
+set tabstop=2 shiftwidth=2 expandtab
+
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -206,6 +209,9 @@ map <C-b> :bn<CR>
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" List - whitespace
+nnoremap L :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 " Search for visually selected word/pattern
 vnoremap // y/\V<C-R>"<CR>
