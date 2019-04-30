@@ -13,6 +13,9 @@ set switchbuf+=usetab,newtab
 " Fix backspace indent
 set backspace=indent,eol,start
 
+" Indent base behaviour 
+set tabstop=2 shiftwidth=2 expandtab
+
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -30,6 +33,12 @@ let mapleader=","
 
 " Enable hidden buffers
 set hidden
+
+" Clipboard behaviour
+set clipboard=unnamed
+
+" Clipboard paste respect indentation
+:nnoremap p p=`]
 
 " Searching
 set hlsearch
@@ -130,7 +139,6 @@ augroup vimrc-javascript
   autocmd Filetype javascript setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:bullets_enabled_file_types = ['markdown', 'text', 'gitcommit']
 
 let g:user_emmet_install_global = 0
@@ -158,8 +166,11 @@ let g:fzf_colors =
 \ 'spinner': ['fg', 'Label'],
 \ 'header':  ['fg', 'Comment'] }
 
-" Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ .log\
+" The Silver Searcher
+if executable('ag')
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -199,8 +210,14 @@ map <C-b> :bn<CR>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+" List - whitespace
+nnoremap L :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+
+" Search for visually selected word/pattern
+vnoremap // y/\V<C-R>"<CR>
+
 nnoremap <c-p> :FZF<cr>
-inoremap jj <Esc>
+inoremap vv <Esc>
 
 " Panes and Tab navigation
 nnoremap <S-Tab> gT 
@@ -215,8 +232,7 @@ nnoremap <C-l> <C-w>v
 " ----------Misc
 " Tabs
 noremap <silent> <leader>t :tabnew<CR>
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 nnoremap \ :Ag<SPACE>
 
 let &packpath = &runtimepath

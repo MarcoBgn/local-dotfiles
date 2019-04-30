@@ -1,7 +1,5 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 alias bex='bundle exec'
 alias ber='bundle exec rspec'
 alias beru='bundle exec rubocop'
@@ -36,13 +34,16 @@ function mas {
   cd "$HOME/mas-projects/${1:-frontend}"
 }
 
+function dir {
+  cd "$HOME/${1:-spikes}"
+}
 # Git branch in prompt.
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-
 export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+export FZF_DEFAULT_COMMAND='ag %s -l --nocolor -g ""'
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
@@ -55,3 +56,6 @@ export EDITOR="$VISUAL"
 
 source ~/.bashrc
 
+export PATH="~/.rbenv/bin:$PATH"
+
+eval "$(rbenv init -)"
